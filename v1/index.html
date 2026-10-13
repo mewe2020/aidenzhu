@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aiden Zhu</title>
+  <meta name="description" content="Aiden Zhu — projects, activities, and the things I care about." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23ff5b1f'/></svg>" />
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <!-- Loader (Mason-style) -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <svg class="loader__plane" viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+      <path class="loader__trail" d="M4 70 C 30 70, 30 40, 55 40 S 80 20, 92 18" stroke-dasharray="3 6" />
+      <g class="loader__glyph" transform="translate(92 18) rotate(-20)">
+        <path d="M-14 -8 L16 0 L-14 8 L-8 0 Z" />
+        <path d="M-8 0 L16 0" />
+      </g>
+    </svg>
+    <div class="loader__count"><span id="loaderNum">0</span>%</div>
+    <div class="loader__name mono">aiden zhu — portfolio</div>
+  </div>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label" id="cursorLabel"></span></div>
+
+  <!-- Top bar (Pierre-style) -->
+  <header class="topbar">
+    <div class="pill pill--brand">
+      <a href="#top" class="brand-mark" id="brandMark" aria-label="Back to top">AZ</a>
+      <nav class="pill__nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#record">Record</a>
+        <a href="#me">Me</a>
+      </nav>
+    </div>
+    <div class="topbar__clock mono" aria-live="off">
+      <span class="dot"></span><span id="clockCity">—</span>&nbsp;<span id="clock">--:--</span>
+    </div>
+    <div class="topbar__right">
+      <button class="pill pill--icon magnetic" id="themeToggle" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path class="sun" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.41-1.41M4.93 19.07l1.41-1.41m0-11.32L4.93 4.93m14.14 14.14-1.41-1.41"/><circle cx="12" cy="12" r="4"/></svg>
+      </button>
+      <a class="pill pill--cta magnetic" id="mailTop" href="#contact">Say hi</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO: 3D playground + big sentence -->
+    <section class="hero" id="hero">
+      <canvas id="scene" class="hero__canvas" aria-hidden="true"></canvas>
+      <div class="hero__fallback" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="hero__lockup">
+        <h1 class="lockup">
+          <span class="lockup__first serif" id="firstName">Aiden</span>
+          <span class="lockup__tag mono" id="classTag">Class of 2027</span>
+          <span class="lockup__last" id="lastName">Zhu</span>
+        </h1>
+        <p class="hero__line" id="heroLine"></p>
+      </div>
+
+      <div class="hero__hint mono">drag / click the shapes ↯</div>
+      <footer class="bottombar mono">
+        <div class="bottombar__socials" id="socialsTop"></div>
+        <div class="bottombar__scroll">scroll <span class="arrow">↓</span></div>
+      </footer>
+    </section>
+
+    <!-- Hello arc (Yanne-style) -->
+    <section class="hello" aria-label="Hello in many languages">
+      <svg class="hello__svg" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet">
+        <defs><path id="arc" d="M -200 420 Q 600 -80 1400 420" /></defs>
+        <text class="hello__text"><textPath href="#arc" id="helloPath" startOffset="0%"></textPath></text>
+      </svg>
+    </section>
+
+    <!-- About -->
+    <section class="about section" id="about">
+      <div class="section__label mono"><span>01</span> About me</div>
+      <p class="about__text" id="aboutText"></p>
+      <div class="about__grid">
+        <div class="portrait tilt" id="portrait">
+          <div class="portrait__img">
+            <!-- Replace with: <img src="assets/me.jpg" alt="Aiden Zhu"> -->
+            <span class="serif">your photo here</span>
+          </div>
+          <div class="portrait__caption mono"><span id="locationTag"></span><span>●&nbsp;open to ideas</span></div>
+        </div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </section>
+
+    <!-- Selected work -->
+    <section class="work section" id="work">
+      <div class="section__label mono"><span>02</span> Selected work</div>
+      <h2 class="big-title"><span class="serif italic">Things</span> I've made</h2>
+      <ul class="work__list" id="workList"></ul>
+      <div class="work__preview" id="workPreview" aria-hidden="true"><div class="work__preview-inner" id="workPreviewInner"></div></div>
+    </section>
+
+    <!-- Awards marquee -->
+    <section class="marquee" aria-label="Honors">
+      <div class="marquee__track" id="marquee"></div>
+    </section>
+
+    <!-- Record / timeline -->
+    <section class="record section" id="record">
+      <div class="section__label mono"><span>03</span> The record</div>
+      <h2 class="big-title">How I spend <span class="serif italic">my time</span></h2>
+      <div class="filters" id="filters" role="tablist"></div>
+      <ol class="timeline" id="timeline"></ol>
+    </section>
+
+    <!-- Personality -->
+    <section class="me section" id="me">
+      <div class="section__label mono"><span>04</span> Off the clock</div>
+      <h2 class="big-title">A few things <span class="serif italic">about me</span></h2>
+      <div class="me__grid">
+        <div class="stickers" id="stickers">
+          <span class="stickers__hint mono">(go ahead, rearrange them)</span>
+        </div>
+        <aside class="currently">
+          <div class="currently__head mono"><span class="dot dot--live"></span> Currently</div>
+          <dl id="currently"></dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="contact__glow" aria-hidden="true"></div>
+      <p class="mono contact__kicker">Thanks for stopping by</p>
+      <h2 class="contact__title">Let's <span class="serif italic">talk</span>.</h2>
+      <a class="contact__btn magnetic" id="mailBig" href="#" data-cursor="copy">
+        <span id="mailText">you@example.com</span>
+      </a>
+      <p class="mono contact__copied" id="copied" role="status"></p>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <div><span class="footer__k">Local time</span><span id="clock2">--:--</span></div>
+    <div><span class="footer__k">Version</span><span id="version"></span></div>
+    <div class="footer__links" id="socialsBottom"></div>
+    <div><span class="footer__k">Made by</span><span>hand, with too much coffee</span></div>
+  </footer>
+
+  <!-- Project modal -->
+  <dialog class="modal" id="modal">
+    <button class="modal__close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal__art" id="modalArt"></div>
+    <div class="modal__body">
+      <p class="mono" id="modalMeta"></p>
+      <h3 id="modalTitle"></h3>
+      <p class="modal__summary" id="modalSummary"></p>
+      <p id="modalDetails"></p>
+      <a class="pill pill--cta" id="modalLink" target="_blank" rel="noopener">Visit ↗</a>
+    </div>
+  </dialog>
+
+  <script src="content.js"></script>
+  <script src="main.js"></script>
+  <script type="module" src="hero3d.js"></script>
+</body>
+</html>
